@@ -34,6 +34,29 @@
                         <h1 class="display-4 fw-bold text-primary mb-4">Welcome to Modern Web App</h1>
                         <p class="lead mb-4" th:text="${message}">Hello student.</p>
                         
+                        <!-- HISTORIAL DE SALUDOS -->
+                        <div class="card mt-4 mb-4 text-start shadow-sm border-primary">
+                            <div class="card-header bg-primary text-white">
+                                <h5 class="card-title mb-0">Historial de Saludos</h5>
+                            </div>
+                            <div class="card-body">
+                                <!-- Si la lista está vacía -->
+                                <p class="text-muted" th:if="${#lists.isEmpty(logs)}">
+                                    Aún no hay ningún saludo registrado en esta sesión.
+                                </p>
+                                
+                                <!-- Lista de visitas (Thymeleaf recorre la lista 'logs') -->
+                                <ul class="list-group" th:unless="${#lists.isEmpty(logs)}">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center" th:each="log : ${logs}">
+                                        <span>
+                                            <strong>Nombre:</strong> <span th:text="${log.name}">Anónimo</span>
+                                        </span>
+                                        <span class="badge bg-info text-dark rounded-pill" th:text="${log.timestamp}">12:00:00</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
                         <!-- HTTP Debug Section -->
                         <div class="row mt-4">
                             <div class="col-12">
